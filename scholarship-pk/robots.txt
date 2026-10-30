@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://usmanawan1078-max.github.io/free-websites/scholarship-pk/sitemap.xml
