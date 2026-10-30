@@ -6,14 +6,16 @@
 <title>Free Guides — Scholarships, Remote Work, Everyday How-To</title>
 <meta name="description" content="Three free guide sites: fully funded scholarships, remote work and freelancing for beginners, and everyday how-to answers.">
 <style>
-/* ScholarshipsPK — professional business-blog design.
-   Shared tokens: background #ffffff, surface #f7f8fa, ink #16202b,
+/* Free Guides landing — shared design system (see design-study-100.md §3).
+   Tokens: background #ffffff, surface #f7f8fa, ink #16202b,
    muted #5b6773, line #e3e8ee, accent #0b5cad, card radius 12px,
    content max-width 1080px centered. */
 :root{
   --bg:#ffffff; --surface:#f7f8fa; --ink:#16202b; --muted:#5b6773;
   --line:#e3e8ee; --accent:#0b5cad; --accent-dark:#084d8f;
+  --accent-soft:#e8f1fa;
   --warn-bg:#fff7ed; --warn-line:#d97706; --radius:12px; --measure:720px;
+  --content:1080px; --gap:20px; --section:40px; --card-pad:22px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -21,20 +23,18 @@ body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-s
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline;text-underline-offset:3px}
 
-/* Sticky header: brand + tagline + section nav, pinned to the top. */
+/* Sticky header: brand + section nav, pinned to the top. */
 header.site{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 1px 10px rgba(22,32,43,.07)}
 header.site .head-wrap{max-width:1080px;margin:0 auto;padding:16px 20px 14px}
 header.site .brand{display:inline-block;font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2;color:var(--ink);text-decoration:none}
 header.site .brand:hover{color:var(--accent);text-decoration:none}
-header.site .tag{color:var(--muted);font-size:14.5px;margin:4px 0 12px;line-height:1.5}
 nav.main{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:15px}
 nav.main a{color:var(--ink);font-weight:600;text-decoration:none;padding:2px 0}
 nav.main a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
 
 /* Page frame. */
 main{max-width:1080px;margin:0 auto;padding:32px 20px 56px}
-article{max-width:var(--measure);margin:0 auto;line-height:1.7}
-article ~ .ad-slot,article ~ .related{max-width:var(--measure);margin-left:auto;margin-right:auto}
+section{margin:0 0 var(--section)}
 
 /* Typography. */
 h1{font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:8px 0 12px}
@@ -46,9 +46,13 @@ li{margin:6px 0}
 .meta,.updated{color:var(--muted);font-size:14px}
 .updated{font-style:italic}
 
+/* Section labels. */
+.section-label{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+.section-label::after{content:"";display:block;height:1px;background:var(--line);margin-top:8px}
+
 /* Index hero: big title + lede on a surface panel. */
 .hero{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:36px 32px;margin:8px 0 28px}
-.hero h1{font-size:42px;letter-spacing:-.025em;line-height:1.12;margin:0 0 12px}
+.hero h1{font-size:40px;letter-spacing:-.025em;line-height:1.12;margin:0 0 12px}
 .hero p{font-size:18px;line-height:1.65}
 .hero .meta{font-size:14px}
 
@@ -56,15 +60,39 @@ li{margin:6px 0}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin:20px 0}
 .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:box-shadow .2s ease,transform .2s ease}
 .card:hover{box-shadow:0 10px 28px rgba(22,32,43,.10);transform:translateY(-2px)}
-.card h3{margin:0 0 8px;font-size:19px}
-.card p{color:var(--muted);margin:8px 0 14px}
+.card h3{margin:0 0 8px;font-size:18px}
+.card h3 a{color:var(--ink);text-decoration:none}
+.card h3 a:hover{color:var(--accent);text-decoration:none}
+.card p{color:var(--muted);margin:8px 0 14px;font-size:15.5px;line-height:1.55}
+.card .meta{font-size:13px;color:var(--muted);margin:10px 0 0}
 .card a.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:9px 14px;border-radius:8px;font-size:15px;font-weight:700}
 .card a.btn:hover{background:var(--accent-dark);text-decoration:none}
 
-/* Index link lists become clean card rows (no markup change needed). */
-main > ul{list-style:none;padding-left:0}
-main > ul li{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin:10px 0}
-main > ul li a{font-weight:700}
+/* Tag pills (card categories). */
+.tag{display:inline-block;background:var(--accent-soft);color:var(--accent);border-radius:20px;padding:3px 12px;font-size:13px;font-weight:700;letter-spacing:0.01em}
+
+/* Browse pills (navigation, not content). */
+.pills{margin:16px 0}
+.pills a{display:inline-block;margin:4px 8px 4px 0;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;color:var(--ink);font-weight:600;text-decoration:none}
+.pills a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+
+/* Trust strip. */
+.trust{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px}
+.trust p{font-size:15.5px;line-height:1.55;margin:8px 0}
+.trust p:first-child{margin-top:0}
+.trust p:last-child{margin-bottom:0}
+
+/* Ad slot: labelled placeholder in the same visual system as cards. */
+.ad-slot{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;margin:0 0 var(--section);text-align:center}
+.ad-slot .ad-label{display:block;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.ad-slot p{font-size:13px;color:var(--muted);margin:0}
+
+/* Subscribe banner (same words + link as before, now inside the page flow). */
+.subscribe{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px 20px;text-align:center}
+.subscribe strong{font-size:18px;color:var(--ink)}
+.subscribe p{margin:8px 0 14px;color:var(--muted)}
+.subscribe a.btn{display:inline-block;padding:11px 22px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:700}
+.subscribe a.btn:hover{background:var(--accent-dark);text-decoration:none}
 
 /* Callouts, official links, tables. */
 .box{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);padding:16px 18px;margin:20px 0;border-radius:var(--radius)}
@@ -78,21 +106,21 @@ th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-al
 th{background:var(--surface)}
 tr:nth-child(even) td{background:var(--surface)}
 
-/* Ad placeholder slots stay visibly placeholders. */
-.ad-slot{border:1px dashed #94a3b8;background:#f8fafc;color:#64748b;text-align:center;font-size:13px;padding:16px 8px;margin:24px 0;border-radius:var(--radius)}
-
 /* Related guides as pills. */
 .related{border-top:1px solid var(--line);margin-top:32px;padding-top:16px}
 .related a{display:inline-block;margin:4px 8px 4px 0;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;color:var(--ink);font-weight:600;text-decoration:none}
 .related a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
 .faq h3{font-size:17px;margin:14px 0 2px}
 
-/* Dark footer: brand + links. */
+/* Ink footer: 4 columns + bottom bar. */
 footer.site{background:var(--ink);color:#9aa7b4;padding:28px 0}
 footer.site .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 footer.site p{font-size:14px;line-height:1.6;margin:8px 0}
 footer.site a{color:#d5dde4;font-weight:600}
 footer.site a:hover{color:#fff}
+.foot-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.foot-grid b{display:block;color:#fff;margin-bottom:6px}
+.foot-bottom{font-size:14px;border-top:1px solid rgba(255,255,255,.15);padding-top:14px;margin-top:20px}
 
 /* Forms. */
 form label{display:block;font-weight:700;margin:12px 0 4px}
@@ -113,6 +141,7 @@ figure.hero figcaption{font-size:13px;color:var(--muted);margin-top:8px}
   header.site .head-wrap{padding:14px 16px 12px}
   header.site .brand{font-size:23px}
   nav.main{gap:6px 14px;font-size:14.5px}
+  nav.main a{padding:8px 4px}
   main{padding:24px 16px 40px}
   h1{font-size:30px}
   h2{font-size:21px}
@@ -121,6 +150,7 @@ figure.hero figcaption{font-size:13px;color:var(--muted);margin-top:8px}
   .hero p{font-size:17px}
   .cards{grid-template-columns:1fr}
   footer.site .wrap{padding:0 16px}
+  .foot-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -131,23 +161,54 @@ figure.hero figcaption{font-size:13px;color:var(--muted);margin-top:8px}
 <section class="hero">
 <h1>Free Guides</h1>
 <p>Three free sites, each answering real questions in plain words.</p>
+<p class="meta">3 sites · 33 guide pages</p>
 </section>
+
+<section>
 <div class="cards">
-<div class="card"><a href="scholarship-pk/">Scholarships &amp; Study Abroad</a><p>Fully funded scholarships for Pakistani, Indian, and international students — Chevening, Fulbright, DAAD, Erasmus Mundus, Türkiye Bursları, and more.</p></div>
-<div class="card"><a href="remote-work-guides/">Remote Work &amp; Freelancing for Beginners</a><p>How to start freelancing with no experience, write a profile that gets replies, find a first client, and avoid scams.</p></div>
-<div class="card"><a href="everyday-howto/">Everyday How-To</a><p>Clear answers to everyday tech questions — storage, Wi-Fi, photos, spam calls, batteries, backups.</p></div>
+<div class="card"><span class="tag">Scholarships</span><h3><a href="scholarship-pk/">Scholarships &amp; Study Abroad</a></h3><p>Fully funded scholarships for Pakistani, Indian, and international students — Chevening, Fulbright, DAAD, Erasmus Mundus, Türkiye Bursları, and more.</p><p class="meta">13 guides</p></div>
+<div class="card"><span class="tag">Remote work</span><h3><a href="remote-work-guides/">Remote Work &amp; Freelancing for Beginners</a></h3><p>How to start freelancing with no experience, write a profile that gets replies, find a first client, and avoid scams.</p><p class="meta">10 guides</p></div>
+<div class="card"><span class="tag">How-to</span><h3><a href="everyday-howto/">Everyday How-To</a></h3><p>Clear answers to everyday tech questions — storage, Wi-Fi, photos, spam calls, batteries, backups.</p><p class="meta">10 guides</p></div>
+</div>
+</section>
+
+<section>
+<p class="section-label">Start here</p>
+<div class="cards">
+<div class="card"><span class="tag">Scholarships</span><h3><a href="scholarship-pk/chevening-scholarship-pakistan.html">Chevening (UK)</a></h3><p>One-year fully funded master's in the UK for future leaders.</p><p class="meta">By Free Guides</p></div>
+<div class="card"><span class="tag">Remote work</span><h3><a href="remote-work-guides/start-freelancing-no-experience.html">How to start freelancing with no experience</a></h3><p>The honest first steps, in order, without pretending it is fast or easy.</p><p class="meta">By Free Guides</p></div>
+<div class="card"><span class="tag">How-to</span><h3><a href="everyday-howto/free-up-storage-android.html">How to Free Up Storage on an Android Phone</a></h3><p>Safe steps that recover space without deleting anything you need.</p><p class="meta">By Free Guides</p></div>
+</div>
+</section>
+
+<section>
+<p class="section-label">Browse by topic</p>
+<div class="pills"><a href="scholarship-pk/">Scholarships &amp; Study Abroad</a><a href="remote-work-guides/">Remote Work &amp; Freelancing</a><a href="everyday-howto/">Everyday How-To</a><a href="scholarship-pk/chevening-scholarship-pakistan.html">Chevening</a><a href="scholarship-pk/ielts-requirements-scholarships.html">IELTS</a><a href="remote-work-guides/find-first-client.html">First client</a><a href="remote-work-guides/upwork-profile-that-gets-replies.html">Upwork profile</a><a href="everyday-howto/why-wifi-slow-fix.html">Wi-Fi</a><a href="everyday-howto/free-up-storage-android.html">Storage</a></div>
+</section>
+
+<div class="ad-slot"><span class="ad-label">ADVERTISEMENT</span><p>Ad space reserved — ads will appear here after approval.</p></div>
+
+<section class="trust">
+<p>Original guides, written in plain words — not copied from other sites.</p>
+<p>Checked against official sources; official links are labelled as official.</p>
+<p>No income promises, no guaranteed outcomes, no paid placements.</p>
+<p>About, contact and privacy pages for all three sites are linked in the footer below.</p>
+</section>
+
+<div class="subscribe">
+<strong>Watch Geo Empires on YouTube</strong>
+<p>A new story every day — history, geopolitics, and the events shaping the world.</p>
+<a class="btn" href="https://www.youtube.com/@GeoEmpires?sub_confirmation=1">Subscribe on YouTube</a>
 </div>
 </main>
 <footer class="site"><div class="wrap">
-<p><a href="scholarship-pk/">Scholarships &amp; Study Abroad</a> · <a href="remote-work-guides/">Remote Work &amp; Freelancing for Beginners</a> · <a href="everyday-howto/">Everyday How-To</a></p>
-<p>© 2026 Free Guides. Three free guide sites, each answering real questions in plain words.</p>
-</div></footer>
-
-<div style="max-width:1080px;margin:28px auto;padding:22px 20px;border:1px solid #e3e8ee;border-radius:12px;background:#f7f8fa;text-align:center;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;">
-<strong style="font-size:18px;color:#16202b;">Watch Geo Empires on YouTube</strong>
-<p style="margin:8px 0 14px;color:#5b6773;">A new story every day — history, geopolitics, and the events shaping the world.</p>
-<a href="https://www.youtube.com/@GeoEmpires?sub_confirmation=1" style="display:inline-block;padding:11px 22px;background:#0b5cad;color:#fff;text-decoration:none;border-radius:8px;font-weight:700;">Subscribe on YouTube</a>
+<div class="foot-grid">
+<div><b>Free Guides</b><p>Three free guide sites, each answering real questions in plain words.</p></div>
+<div><b>Sites</b><p><a href="scholarship-pk/">Scholarships &amp; Study Abroad</a><br><a href="remote-work-guides/">Remote Work &amp; Freelancing</a><br><a href="everyday-howto/">Everyday How-To</a></p></div>
+<div><b>About</b><p>ScholarshipsPK: <a href="scholarship-pk/about.html">About</a> · <a href="scholarship-pk/contact.html">Contact</a> · <a href="scholarship-pk/privacy-policy.html">Privacy</a><br>Remote Work Guides: <a href="remote-work-guides/about.html">About</a> · <a href="remote-work-guides/contact.html">Contact</a> · <a href="remote-work-guides/privacy.html">Privacy</a><br>Everyday How-To: <a href="everyday-howto/about.html">About</a> · <a href="everyday-howto/contact.html">Contact</a> · <a href="everyday-howto/privacy.html">Privacy</a></p></div>
+<div><b>Watch</b><p><a href="https://www.youtube.com/@GeoEmpires?sub_confirmation=1">Geo Empires on YouTube</a></p></div>
 </div>
-
+<p class="foot-bottom">© 2026 Free Guides · Content is original and free · Official links are labelled as official.</p>
+</div></footer>
 </body>
 </html>
