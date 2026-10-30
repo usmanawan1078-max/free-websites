@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://usmanawan1078-max.github.io/free-websites/remote-work-guides/sitemap.xml
