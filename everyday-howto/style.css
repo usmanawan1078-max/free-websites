@@ -6,10 +6,16 @@
   --muted: #5b6773;
   --line: #e3e8ee;
   --accent: #0b5cad;
+  --accent-dark: #084d8f;
   --accent-soft: #e8f1fa;
+  --warn-bg: #fff7ed;
+  --warn-line: #d97706;
   --radius: 12px;
   --content: 1080px;
-  --measure: 760px;
+  --measure: 720px;
+  --gap: 20px;
+  --section: 40px;
+  --card-pad: 22px;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -18,8 +24,8 @@ body {
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--ink);
   background: var(--bg);
-  line-height: 1.7;
-  font-size: 18px;
+  line-height: 1.65;
+  font-size: 17px;
 }
 a { color: var(--accent); }
 a:hover { text-decoration-thickness: 2px; }
@@ -67,24 +73,25 @@ nav.main a:hover { color: var(--accent); }
 main {
   max-width: var(--content);
   margin: 0 auto;
-  padding: 32px 24px 64px;
+  padding: 32px 20px 56px;
 }
-main.article { max-width: var(--measure); }
+main.article { max-width: var(--measure); font-size: 18px; line-height: 1.7; }
+section { margin: 0 0 var(--section); }
 h1 {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: 800;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   line-height: 1.15;
   margin: 8px 0 14px;
 }
 h2 {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
   line-height: 1.3;
-  margin: 40px 0 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
+  margin: 36px 0 10px;
+  padding-left: 14px;
+  border-left: 4px solid var(--accent);
 }
 h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin: 28px 0 8px; }
 p { margin: 10px 0; }
@@ -94,32 +101,48 @@ p { margin: 10px 0; }
 .breadcrumb a:hover { text-decoration: underline; }
 
 /* ---- Index hero ---- */
-.hero { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px 32px; margin: 8px 0 28px; }
-.hero h1 { font-size: 44px; margin-bottom: 16px; }
+.hero { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 36px 32px; margin: 8px 0 28px; }
+.hero h1 { font-size: 40px; margin-bottom: 16px; }
 .hero .lede { max-width: 720px; }
 
-/* ---- Cards ---- */
+/* Section labels. */
+.section-label { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+.section-label::after { content: ""; display: block; height: 1px; background: var(--line); margin-top: 8px; }
+
+/* Browse pills (navigation, not content). */
+.pill-group-label { font-size: 14px; font-weight: 700; margin: 16px 0 8px; }
+.pills { margin: 0 0 8px; }
+.pills a { display: inline-block; margin: 4px 8px 4px 0; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; color: var(--ink); font-weight: 600; text-decoration: none; }
+.pills a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+
+/* Trust strip. */
+.trust { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; }
+.trust p { font-size: 15.5px; line-height: 1.55; margin: 8px 0; }
+.trust p:first-child { margin-top: 0; }
+.trust p:last-child { margin-bottom: 0; }
+
+/* ---- Cards (single grid system) ---- */
 .card-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
-.card-list li {
-  background: var(--surface);
+.card-list .card {
+  background: #fff;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 20px 22px;
+  padding: 22px;
+  transition: box-shadow .2s ease, transform .2s ease;
 }
-.card-list li:hover { border-color: var(--accent); }
-.card-list a { font-weight: 700; font-size: 18px; text-decoration: none; color: var(--ink); }
-.card-list a:hover { color: var(--accent); }
-.card-list p { margin: 6px 0 0; color: var(--muted); font-size: 16px; line-height: 1.55; }
-.card-list.compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.card-list.compact li { padding: 14px 18px; }
-.card-list.compact a { font-size: 16px; font-weight: 600; }
+.card-list .card:hover { border-color: var(--accent); box-shadow: 0 10px 28px rgba(22, 32, 43, .10); transform: translateY(-2px); }
+.card-list .card h3 { margin: 0 0 8px; font-size: 18px; }
+.card-list .card h3 a { font-weight: 700; font-size: 18px; text-decoration: none; color: var(--ink); }
+.card-list .card h3 a:hover { color: var(--accent); }
+.card-list .card p { margin: 8px 0 0; color: var(--muted); font-size: 15.5px; line-height: 1.55; }
+.card-list .card .meta { font-size: 13px; color: var(--muted); margin: 10px 0 0; }
 .tag {
   display: inline-block;
   background: var(--accent-soft);
@@ -152,41 +175,56 @@ figure.hero { margin: 1.4rem 0; }
 figure.hero img { width: 100%; height: auto; display: block; border-radius: var(--radius); }
 figure.hero figcaption { font-size: 14px; color: var(--muted); margin-top: 8px; }
 .related { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 8px; }
-.related h2 { border-bottom: 0; padding-bottom: 0; }
+.related h2 { border-bottom: 0; padding-bottom: 0; border-left: 0; padding-left: 0; }
 
-/* ---- Ad placeholder (position and wording unchanged) ---- */
+/* ---- Ad slot: labelled placeholder in the same visual system as cards ---- */
 .ad-slot {
-  border: 1px dashed #b9c4d0;
-  color: var(--muted);
-  text-align: center;
-  font-size: 13px;
-  padding: 18px 10px;
-  margin: 24px 0;
-  border-radius: var(--radius);
-}
-
-/* ---- Footer: brand + links ---- */
-footer.site {
   background: var(--surface);
-  border-top: 1px solid var(--line);
-  padding: 28px 24px 32px;
-  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 0 0 var(--section);
+  text-align: center;
+}
+.ad-slot .ad-label { display: block; font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.ad-slot p { font-size: 13px; color: var(--muted); margin: 0; }
+
+/* Subscribe banner (same words + link as before, now inside the page flow). */
+.subscribe { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 20px; text-align: center; margin: 0 0 var(--section); }
+.subscribe strong { font-size: 18px; color: var(--ink); }
+.subscribe p { margin: 8px 0 14px; color: var(--muted); }
+.subscribe a.btn { display: inline-block; padding: 11px 22px; background: var(--accent); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 700; }
+.subscribe a.btn:hover { background: var(--accent-dark); text-decoration: none; }
+
+/* ---- Footer: ink, 4 columns + bottom bar ---- */
+footer.site {
+  background: var(--ink);
+  border-top: 0;
+  padding: 28px 24px;
+  color: #9aa7b4;
   font-size: 14px;
   line-height: 1.6;
 }
 footer.site .wrap { max-width: var(--content); margin: 0 auto; }
-footer.site .brand { display: block; margin-bottom: 10px; }
-footer.site nav a, footer.site a { margin-right: 16px; color: var(--muted); text-decoration: none; }
-footer.site a:hover { color: var(--accent); }
+footer.site .brand { display: block; margin-bottom: 10px; color: #fff; }
+footer.site .brand span { color: #d5dde4; }
+footer.site nav a, footer.site a { margin-right: 16px; color: #d5dde4; text-decoration: none; font-weight: 600; }
+footer.site a:hover { color: #fff; }
+.foot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.foot-grid b { display: block; color: #fff; margin-bottom: 6px; }
+.foot-grid p { margin: 8px 0; }
+.foot-bottom { font-size: 14px; border-top: 1px solid rgba(255, 255, 255, .15); padding-top: 14px; margin-top: 20px; }
 
 /* ---- Single column under 720px, nav wraps ---- */
 @media (max-width: 720px) {
   body { font-size: 17px; }
-  main { padding: 24px 18px 48px; }
+  main { padding: 24px 16px 40px; }
   header.site .wrap { padding: 12px 18px; }
+  nav.main a { padding: 8px 4px; }
   h1 { font-size: 30px; }
   .hero h1 { font-size: 32px; }
-  h2 { font-size: 22px; }
-  .card-list, .card-list.compact { grid-template-columns: 1fr; }
+  h2 { font-size: 21px; }
+  .card-list { grid-template-columns: 1fr; }
   .lede { font-size: 19px; }
+  .foot-grid { grid-template-columns: 1fr; }
 }
