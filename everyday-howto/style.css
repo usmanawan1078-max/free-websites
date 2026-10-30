@@ -94,7 +94,7 @@ p { margin: 10px 0; }
 .breadcrumb a:hover { text-decoration: underline; }
 
 /* ---- Index hero ---- */
-.hero { padding: 24px 0 8px; }
+.hero { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px 32px; margin: 8px 0 28px; }
 .hero h1 { font-size: 44px; margin-bottom: 16px; }
 .hero .lede { max-width: 720px; }
 
