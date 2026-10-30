@@ -1,14 +1,17 @@
-/* Remote Work Guides — clean, fast, mobile-first stylesheet. No frameworks. */
+/* Remote Work Guides — professional business-blog stylesheet. No frameworks. */
 :root {
-  --ink: #1c2430;
-  --muted: #5a6572;
-  --accent: #0b6e4f;
-  --accent-soft: #e7f4ee;
-  --line: #dde3e8;
   --bg: #ffffff;
-  --card: #f7f9fa;
+  --surface: #f7f8fa;
+  --ink: #16202b;
+  --muted: #5b6773;
+  --line: #e3e8ee;
+  --accent: #0b5cad;
+  --accent-soft: #e8f1fa;
+  --radius: 12px;
+  --max: 1080px;
 }
 * { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
@@ -16,79 +19,158 @@ body {
   background: var(--bg);
   line-height: 1.65;
   font-size: 18px;
+  -webkit-font-smoothing: antialiased;
 }
 a { color: var(--accent); }
 a:hover { text-decoration: none; }
+
+/* ---- Sticky header: full-width bar, content centered at --max ---- */
 header.site {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
   border-bottom: 1px solid var(--line);
-  padding: 14px 20px;
+  padding: 16px max(20px, calc((100vw - var(--max)) / 2 + 20px));
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 24px;
+  gap: 10px 28px;
   align-items: center;
   justify-content: space-between;
 }
-.logo { font-weight: 800; font-size: 22px; color: var(--ink); text-decoration: none; }
+.logo {
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
 .logo span { color: var(--accent); }
-nav.main a { margin-right: 16px; text-decoration: none; font-size: 16px; }
-nav.main a:last-child { margin-right: 0; }
-main { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
-h1 { font-size: 34px; line-height: 1.25; margin: 8px 0 12px; }
-h2 { font-size: 24px; margin-top: 34px; line-height: 1.3; }
-h3 { font-size: 19px; margin-top: 26px; }
-.lede { font-size: 20px; color: var(--muted); }
+nav.main { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+nav.main a {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  padding: 4px 0;
+}
+nav.main a:hover { color: var(--accent); }
+
+/* ---- Layout ---- */
+main { max-width: var(--max); margin: 0 auto; padding: 32px 20px 64px; }
+main.article { max-width: 760px; line-height: 1.7; }
+main.article p { margin: 0 0 18px; }
+main.article li { margin-bottom: 10px; }
+
+/* ---- Typography ---- */
+h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.2; }
+h1 { font-size: 44px; font-weight: 800; margin: 10px 0 14px; }
+main.article h1 { font-size: 38px; }
+h2 { font-size: 28px; font-weight: 800; margin: 44px 0 16px; }
+main.article h2 {
+  font-size: 26px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+h3 { font-size: 20px; font-weight: 700; margin: 28px 0 10px; }
+.lede { font-size: 20px; line-height: 1.6; color: var(--muted); margin: 0 0 8px; }
 .kicker {
   display: inline-block;
   background: var(--accent-soft);
   color: var(--accent);
   font-weight: 700;
   font-size: 14px;
-  padding: 4px 10px;
+  letter-spacing: 0.01em;
+  padding: 5px 12px;
   border-radius: 20px;
+  margin: 0 0 4px;
 }
+
+/* ---- Index hero band ---- */
+.hero {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 40px 36px 36px;
+  margin: 8px 0 36px;
+}
+.hero h1 { font-size: 46px; }
+.hero .lede { max-width: 720px; }
+
+/* ---- Ad placeholder (kept exactly where it was) ---- */
 .ad-slot {
   border: 1px dashed #b9c2ca;
-  background: var(--card);
+  background: var(--surface);
   color: var(--muted);
   text-align: center;
   font-size: 13px;
   padding: 18px 10px;
   margin: 26px 0;
-  border-radius: 8px;
+  border-radius: var(--radius);
 }
-.card-grid { display: grid; gap: 16px; margin-top: 20px; }
+
+/* ---- Article cards (index) ---- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
 .card {
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 18px 20px;
-  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  background: var(--bg);
+  box-shadow: 0 1px 3px rgba(22, 32, 43, 0.06);
+  display: flex;
+  flex-direction: column;
 }
-.card h3 { margin: 0 0 6px; }
-.card p { margin: 0; color: var(--muted); font-size: 16px; }
-.card a { text-decoration: none; color: var(--ink); }
+.card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(11, 92, 173, 0.12); }
+.card h3 { margin: 0 0 8px; font-size: 20px; }
+.card h3 a { text-decoration: none; color: var(--ink); }
+.card h3 a:hover { color: var(--accent); }
+.card p { margin: 0 0 14px; color: var(--muted); font-size: 16px; line-height: 1.6; flex: 1; }
+.card a.read {
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.card a.read:hover { text-decoration: underline; }
+
+/* ---- Index path list ---- */
 .steps { padding-left: 20px; }
 .steps li { margin-bottom: 12px; }
 .callout {
   border-left: 4px solid var(--accent);
   background: var(--accent-soft);
-  padding: 14px 18px;
-  border-radius: 0 8px 8px 0;
-  margin: 24px 0;
+  padding: 16px 20px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 28px 0;
 }
 .small { font-size: 15px; color: var(--muted); }
+figure.hero { margin: 28px 0; }
+figcaption.small { margin-top: 8px; }
+
+/* ---- Footer ---- */
 footer.site {
   border-top: 1px solid var(--line);
-  padding: 22px 20px 40px;
+  background: var(--surface);
+  padding: 28px max(20px, calc((100vw - var(--max)) / 2 + 20px)) 44px;
   text-align: center;
   font-size: 15px;
   color: var(--muted);
 }
-footer.site a { margin: 0 8px; }
+footer.site a { margin: 0 8px; font-weight: 600; }
+footer.site p { margin: 12px 0 0; }
+
+/* ---- Contact form ---- */
 form label { display: block; margin: 14px 0 4px; font-weight: 600; }
 form input, form textarea {
   width: 100%;
   padding: 10px 12px;
   font-size: 16px;
+  font-family: inherit;
   border: 1px solid var(--line);
   border-radius: 8px;
 }
@@ -99,11 +181,20 @@ form button {
   border: 0;
   padding: 12px 22px;
   font-size: 17px;
+  font-weight: 700;
   border-radius: 8px;
   cursor: pointer;
 }
-@media (max-width: 560px) {
+
+/* ---- Single column under 720px, nav wraps ---- */
+@media (max-width: 720px) {
   body { font-size: 17px; }
-  h1 { font-size: 28px; }
-  nav.main a { margin-right: 12px; }
+  main { padding: 24px 18px 48px; }
+  h1, .hero h1 { font-size: 30px; }
+  main.article h1 { font-size: 28px; }
+  h2 { font-size: 24px; }
+  .hero { padding: 28px 22px; }
+  .card-grid { grid-template-columns: 1fr; }
+  header.site { flex-direction: column; align-items: flex-start; gap: 8px; }
+  nav.main { gap: 4px 16px; }
 }
