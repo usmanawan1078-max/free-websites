@@ -49,6 +49,10 @@ li{margin:6px 0}
 /* Section labels. */
 .section-label{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 14px}
 .section-label::after{content:"";display:block;height:1px;background:var(--line);margin-top:8px}
+.hero-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0 0}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px}
+.step b{display:block;font-size:15px;margin-bottom:4px}
+.step p{font-size:14.5px;color:var(--muted);margin:0}
 
 /* Index hero: big title + lede on a surface panel. */
 .hero{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:36px 32px;margin:8px 0 28px}
@@ -149,6 +153,7 @@ figure.hero figcaption{font-size:13px;color:var(--muted);margin-top:8px}
   .hero h1{font-size:32px}
   .hero p{font-size:17px}
   .cards{grid-template-columns:1fr}
+  .hero-steps{grid-template-columns:1fr}
   footer.site .wrap{padding:0 16px}
   .foot-grid{grid-template-columns:1fr}
 }
@@ -162,6 +167,11 @@ figure.hero figcaption{font-size:13px;color:var(--muted);margin-top:8px}
 <h1>Free Guides</h1>
 <p>Three free sites, each answering real questions in plain words.</p>
 <p class="meta">3 sites · 33 guide pages</p>
+<div class="hero-steps">
+<div class="step"><b>1. Study abroad</b><p><a href="scholarship-pk/">ScholarshipsPK</a> — fully funded scholarships, explained in plain language.</p></div>
+<div class="step"><b>2. Work remotely</b><p><a href="remote-work-guides/">Remote Work Guides</a> — freelancing for beginners, with no income promises.</p></div>
+<div class="step"><b>3. Fix everyday tech</b><p><a href="everyday-howto/">Everyday How-To</a> — safe steps for ordinary phones and laptops.</p></div>
+</div>
 </section>
 
 <section>
@@ -189,6 +199,7 @@ figure.hero figcaption{font-size:13px;color:var(--muted);margin-top:8px}
 <div class="ad-slot"><span class="ad-label">ADVERTISEMENT</span><p>Ad space reserved — ads will appear here after approval.</p></div>
 
 <section class="trust">
+<p class="section-label">How we write</p>
 <p>Original guides, written in plain words — not copied from other sites.</p>
 <p>Checked against official sources; official links are labelled as official.</p>
 <p>No income promises, no guaranteed outcomes, no paid placements.</p>
