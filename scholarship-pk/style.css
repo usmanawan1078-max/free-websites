@@ -1,49 +1,116 @@
-/* ScholarshipsPK — fast, mobile-first, no framework */
-:root{--ink:#1a2332;--muted:#5b6675;--line:#e2e8f0;--brand:#0b4f6c;--accent:#0e7c66;--bg:#ffffff;--soft:#f1f5f9;--warn:#fff7ed}
+/* ScholarshipsPK — professional business-blog design.
+   Shared tokens: background #ffffff, surface #f7f8fa, ink #16202b,
+   muted #5b6773, line #e3e8ee, accent #0b5cad, card radius 12px,
+   content max-width 1080px centered. */
+:root{
+  --bg:#ffffff; --surface:#f7f8fa; --ink:#16202b; --muted:#5b6773;
+  --line:#e3e8ee; --accent:#0b5cad; --accent-dark:#084d8f;
+  --warn-bg:#fff7ed; --warn-line:#d97706; --radius:12px; --measure:720px;
+}
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px}
-a{color:var(--brand);text-decoration:underline}
-a:hover{text-decoration:none}
-header.site{border-bottom:3px solid var(--brand);padding:14px 16px 10px}
-header.site .brand{font-size:26px;font-weight:800;color:var(--brand);text-decoration:none;line-height:1.2}
-header.site .tag{color:var(--muted);font-size:14px;margin:2px 0 10px}
-nav.main{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:15px}
-nav.main a{text-decoration:none}
-nav.main a:hover{text-decoration:underline}
-main{max-width:760px;margin:0 auto;padding:20px 16px 40px}
-h1{font-size:30px;line-height:1.25;margin:10px 0 6px}
-h2{font-size:23px;line-height:1.3;margin:28px 0 8px;border-bottom:1px solid var(--line);padding-bottom:4px}
-h3{font-size:19px;margin:20px 0 6px}
-p{margin:8px 0}
-ul,ol{margin:8px 0;padding-left:22px}
-li{margin:4px 0}
-.meta{color:var(--muted);font-size:14px}
-.updated{color:var(--muted);font-size:14px;font-style:italic}
-.box{background:var(--soft);border:1px solid var(--line);border-left:4px solid var(--brand);padding:12px 14px;margin:16px 0;border-radius:4px}
-.box.warn{background:var(--warn);border-left-color:#d97706}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* Sticky header: brand + tagline + section nav, pinned to the top. */
+header.site{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 1px 10px rgba(22,32,43,.07)}
+header.site .head-wrap{max-width:1080px;margin:0 auto;padding:16px 20px 14px}
+header.site .brand{display:inline-block;font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1.2;color:var(--ink);text-decoration:none}
+header.site .brand:hover{color:var(--accent);text-decoration:none}
+header.site .tag{color:var(--muted);font-size:14.5px;margin:4px 0 12px;line-height:1.5}
+nav.main{display:flex;flex-wrap:wrap;gap:6px 20px;font-size:15px}
+nav.main a{color:var(--ink);font-weight:600;text-decoration:none;padding:2px 0}
+nav.main a:hover{color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+
+/* Page frame. */
+main{max-width:1080px;margin:0 auto;padding:32px 20px 56px}
+article{max-width:var(--measure);margin:0 auto;line-height:1.7}
+article ~ .ad-slot,article ~ .related{max-width:var(--measure);margin-left:auto;margin-right:auto}
+
+/* Typography. */
+h1{font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:1.15;margin:8px 0 12px}
+h2{font-size:24px;font-weight:800;letter-spacing:-.01em;line-height:1.3;margin:36px 0 10px;padding-left:14px;border-left:4px solid var(--accent)}
+h3{font-size:19px;font-weight:700;margin:22px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:6px 0}
+.meta,.updated{color:var(--muted);font-size:14px}
+.updated{font-style:italic}
+
+/* Index hero: big title + lede on a surface panel. */
+.hero{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:36px 32px;margin:8px 0 28px}
+.hero h1{font-size:42px;letter-spacing:-.025em;line-height:1.12;margin:0 0 12px}
+.hero p{font-size:18px;line-height:1.65}
+.hero .meta{font-size:14px}
+
+/* Cards: responsive grid, lift on hover. */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin:20px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;transition:box-shadow .2s ease,transform .2s ease}
+.card:hover{box-shadow:0 10px 28px rgba(22,32,43,.10);transform:translateY(-2px)}
+.card h3{margin:0 0 8px;font-size:19px}
+.card p{color:var(--muted);margin:8px 0 14px}
+.card a.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:9px 14px;border-radius:8px;font-size:15px;font-weight:700}
+.card a.btn:hover{background:var(--accent-dark);text-decoration:none}
+
+/* Index link lists become clean card rows (no markup change needed). */
+main > ul{list-style:none;padding-left:0}
+main > ul li{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;margin:10px 0}
+main > ul li a{font-weight:700}
+
+/* Callouts, official links, tables. */
+.box{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);padding:16px 18px;margin:20px 0;border-radius:var(--radius)}
+.box.warn{background:var(--warn-bg);border-left-color:var(--warn-line)}
 .box strong{display:block;margin-bottom:4px}
-.official{margin:18px 0}
-.official a{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:9px 16px;border-radius:6px;font-weight:700}
-.official a:hover{opacity:.9}
-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:15px}
-th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
-th{background:var(--soft)}
-.cards{display:grid;grid-template-columns:1fr;gap:12px;margin:14px 0}
-@media(min-width:640px){.cards{grid-template-columns:1fr 1fr}}
-.card{border:1px solid var(--line);border-radius:8px;padding:14px}
-.card h3{margin-top:0}
-.card a.btn{display:inline-block;margin-top:6px;background:var(--brand);color:#fff;text-decoration:none;padding:7px 12px;border-radius:5px;font-size:15px}
-.ad-slot{border:1px dashed #94a3b8;background:#f8fafc;color:#64748b;text-align:center;font-size:13px;padding:14px 8px;margin:18px 0;border-radius:4px}
-.related{border-top:1px solid var(--line);margin-top:28px;padding-top:10px}
-.related a{display:inline-block;margin:4px 10px 4px 0}
+.official{margin:20px 0}
+.official a{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:11px 18px;border-radius:8px;font-weight:700}
+.official a:hover{background:var(--accent-dark);text-decoration:none}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+th,td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{background:var(--surface)}
+tr:nth-child(even) td{background:var(--surface)}
+
+/* Ad placeholder slots stay visibly placeholders. */
+.ad-slot{border:1px dashed #94a3b8;background:#f8fafc;color:#64748b;text-align:center;font-size:13px;padding:16px 8px;margin:24px 0;border-radius:var(--radius)}
+
+/* Related guides as pills. */
+.related{border-top:1px solid var(--line);margin-top:32px;padding-top:16px}
+.related a{display:inline-block;margin:4px 8px 4px 0;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;color:var(--ink);font-weight:600;text-decoration:none}
+.related a:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
 .faq h3{font-size:17px;margin:14px 0 2px}
-footer.site{border-top:3px solid var(--brand);padding:16px;color:var(--muted);font-size:14px}
-footer.site .wrap{max-width:760px;margin:0 auto;padding:0 16px}
-footer.site a{color:var(--muted)}
+
+/* Dark footer: brand + links. */
+footer.site{background:var(--ink);color:#9aa7b4;padding:28px 0}
+footer.site .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+footer.site p{font-size:14px;line-height:1.6;margin:8px 0}
+footer.site a{color:#d5dde4;font-weight:600}
+footer.site a:hover{color:#fff}
+
+/* Forms. */
 form label{display:block;font-weight:700;margin:12px 0 4px}
-form input,form textarea,form select{width:100%;padding:10px;border:1px solid var(--line);border-radius:5px;font-size:16px}
-form button{background:var(--brand);color:#fff;border:0;padding:11px 18px;border-radius:6px;font-size:16px;cursor:pointer;margin-top:12px}
+form input,form textarea,form select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;font-size:16px;font-family:inherit}
+form input:focus,form textarea:focus,form select:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+form button{background:var(--accent);color:#fff;border:0;padding:12px 20px;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-top:12px}
+form button:hover{background:var(--accent-dark)}
 .small{font-size:14px;color:var(--muted)}
-figure.hero{margin:16px 0}
-figure.hero img{max-width:100%;height:auto;display:block;border-radius:6px}
-figure.hero figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+
+/* Hero images. */
+figure.hero{margin:20px 0}
+figure.hero img{max-width:100%;height:auto;display:block;border-radius:var(--radius);box-shadow:0 6px 20px rgba(22,32,43,.10)}
+figure.hero figcaption{font-size:13px;color:var(--muted);margin-top:8px}
+
+/* Single column under 720px, nav wraps. */
+@media(max-width:720px){
+  body{font-size:16.5px}
+  header.site .head-wrap{padding:14px 16px 12px}
+  header.site .brand{font-size:23px}
+  nav.main{gap:6px 14px;font-size:14.5px}
+  main{padding:24px 16px 40px}
+  h1{font-size:30px}
+  h2{font-size:21px}
+  .hero{padding:24px 20px}
+  .hero h1{font-size:32px}
+  .hero p{font-size:17px}
+  .cards{grid-template-columns:1fr}
+  footer.site .wrap{padding:0 16px}
+}
